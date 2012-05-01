@@ -1,11 +1,9 @@
 class App
   constructor: (@block) ->
-    @canvas = document.getElementById 'slips-canvas'
+    @canvas = document.getElementById 'app-canvas'
     @context = @canvas.getContext '2d'
     @container = document.getElementById 'app-content'
     @container.innerHTML = ''
-    @context.fillStyle = "#eeeeee"
-    @context.fillRect 0, 0, 500, 500
     @block()
 
   rect: (left, top, width, height, style = {}) ->

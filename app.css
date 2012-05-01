@@ -1,4 +1,4 @@
-#app {
+#app, #code {
   float: left;
   margin: 0 2em 2em 0;
 }
@@ -22,12 +22,6 @@
   top: 0;
   left: 0;
   z-index: 1;
-}
-
-
-#code {
-  float: left;
-  margin: 0 2em 2em 0;
 }
 
 #editor textarea, #compiled textarea {

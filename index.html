@@ -25,6 +25,9 @@
           var run = function (code) {
             eval(code);
           };
+          $("#app-content").empty();
+          // Replace with a fresh canvas
+          $("#app-canvas").replaceWith('<canvas id="app-canvas" height="400" width="500"></canvas>');
           var jsCode = compile(code);
           $("#compiled textarea").text(jsCode);
           run(jsCode);
@@ -44,7 +47,7 @@
     <div id="app">
       <h2>App</h2>
       <div class="container">
-        <canvas id="slips-canvas" height="400" width="500"></canvas>
+        <canvas id="app-canvas" height="400" width="500"></canvas>
         <div id="app-content"></div>
       </div>
       <div class="console"></div>
