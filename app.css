@@ -10,10 +10,11 @@
   height: 400px;
 }
 
-#app .contents {
+#app-content {
   position: relative;
   z-index: 10;
   background: transparent;
+  font-family: Arial, sans-serif;
 }
 
 #app canvas {
