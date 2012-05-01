@@ -2,7 +2,7 @@ class App
   constructor: (@block) ->
     @canvas = document.getElementById 'slips-canvas'
     @context = @canvas.getContext '2d'
-    @context.fillStyle = "eeeeee"
+    @context.fillStyle = "#eeeeee"
     @context.fillRect 0, 0, 500, 500
     @block()
 
