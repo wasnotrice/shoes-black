@@ -13,13 +13,13 @@ class App
   para: (text, style = {}) ->
     new Para(@container, text, style)
 
-class Slips
+class Shoes
   @app: (block) ->
     app = new App block
 
   @sample: ->
     """
-    Slips.app ->
+    Shoes.app ->
       style = {
         stroke: "black",
         fill: "mediumorchid",
@@ -31,4 +31,4 @@ class Slips
 
 # export functions, for node or for browser
 exports = exports ? window
-exports.Slips = Slips
+exports.Shoes = Shoes

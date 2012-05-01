@@ -6,7 +6,7 @@
     <script src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js" type="text/javascript"></script>
     <script src="lib/rect.js" type="text/javascript"></script>
     <script src="lib/para.js" type="text/javascript"></script>
-    <script src="lib/slips.js" type="text/javascript"></script>
+    <script src="lib/shoes.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function($) {
         $("#editor").submit(function() {
@@ -33,17 +33,17 @@
           run(jsCode);
           return false;
         });
-        var loadSample = function() { $("#editor textarea").val(Slips.sample()); };
+        var loadSample = function() { $("#editor textarea").val(Shoes.sample()); };
         $("#load-sample").click(loadSample);
         loadSample();
         $("#editor").submit();
       });
     </script>
     <meta charset="UTF-8" />
-    <title>Slips Demo</title>
+    <title>Shoes Demo</title>
   </head>
   <body>
-    <h1>Slips Demo</h1>
+    <h1>Shoes Demo</h1>
     <div id="app">
       <h2>App</h2>
       <div class="container">

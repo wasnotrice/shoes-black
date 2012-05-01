@@ -1,5 +1,5 @@
 $ ->
-  Slips.app ->
+  Shoes.app ->
     @status "starting"
     style =
       stroke: 'black'
