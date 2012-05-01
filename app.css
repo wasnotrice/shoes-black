@@ -1,0 +1,56 @@
+#app {
+  float: left;
+  margin: 0 2em 2em 0;
+}
+
+#app .container {
+  position: relative;
+  border: 2px solid #ccc;
+  width: 500px;
+  height: 400px;
+}
+
+#app .contents {
+  position: relative;
+  z-index: 10;
+  background: transparent;
+}
+
+#app canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+
+#code {
+  float: left;
+  margin: 0 2em 2em 0;
+}
+
+#editor textarea, #compiled textarea {
+  margin: 0 0 1em;
+  border: 2px solid #ccc;
+}
+
+#compiled textarea {
+  display: block;
+  background-color: #eee;
+}
+
+#code textarea, .console {
+  font-family: monospace;
+}
+
+.console {
+  background-color: #eee;
+  border: 2px solid #ccc;
+  margin-top: 1em;
+  width: 500px;
+  color: #555;
+}
+
+.console > p {
+  margin: 0.5em;
+}

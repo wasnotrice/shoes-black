@@ -1,33 +1,22 @@
 class App
-  constructor: ->
+  constructor: (@block) ->
     @canvas = document.getElementById 'slips-canvas'
-    @canvas.width = 300
-    @canvas.height = 300
     @context = @canvas.getContext '2d'
-
-  run: (block) ->
-    block()
+    @context.fillStyle = "eeeeee"
+    @context.fillRect 0, 0, 500, 500
+    @block()
 
   status: (status) ->
-    $('.status').text("#{status} app...")
+    $('.console').empty().append("<p>#{status} app...</p>")
 
-  rect: (left, top, width, height) ->
-    console.log(this)
-    @context.beginPath()
-    @context.rect(left, top, width, height)
-    @context.fillStyle = "ff3377"
-    @context.fill()
-    @context.lineWidth = 4
-    @context.strokeStyle = 'black'
-    @context.stroke()
-    this
+  rect: (left, top, width, height, style = {}) ->
+    rect = new Rect(@context, left, top, width, height, style)
+    console.log "created rect: #{rect}"
+    rect.draw()
 
 class Slips
   @app: (block) ->
-    app = new App
-    console.log("app: #{app}")
-    app.status "testing"
-    block.apply(app)
+    app = new App block
 
 # export functions, for node or for browser
 exports = exports ? window

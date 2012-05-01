@@ -1,16 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="app.css" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="http://github.com/jashkenas/coffee-script/raw/master/extras/coffee-script.js" type="text/javascript"></script>
+    <script src="lib/rect.js" type="text/javascript"></script>
     <script src="lib/slips.js" type="text/javascript"></script>
     <script src="lib/index.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(document).ready(function($) {
+        console.log("running inline script");
+        $("#editor").submit(function() {
+          var code = $("#editor textarea").val();
+          var compile = function (code) {
+            var jsCode;
+            try {
+              jsCode = CoffeeScript.compile(code, { bare: true });
+              $(".console").append("<p>compile...ok</p>");
+            } catch(err) {
+              var x = "a" + "b" + "c";
+              $(".console").append("<p>"+err.message+"</p>");
+              jsCode = "Error :/";
+            }
+            return jsCode;
+          };
+          var run = function (code) {
+            eval(code);
+          };
+          var jsCode = compile(code);
+          $("#compiled textarea").text(jsCode);
+          run(jsCode);
+          return false;
+        });
+      });
+    </script>
     <meta charset="UTF-8" />
     <title>Slips Demo</title>
   </head>
   <body>
     <h1>Slips Demo</h1>
-    <canvas id="slips-canvas">
-    </canvas>
-    <p class="status">Idle</p>
+    <div id="app">
+      <h2>App</h2>
+      <div class="container">
+        <canvas id="slips-canvas" height="400" width="500">
+        </canvas>
+        <div class="contents">
+          <button>Push!</button>
+          <p>In this example, we first define two objects, first_object and second_object, each with a num property. Then we define a multiply function that accepts a single argument, and returns the product of that argument, and the num property of its this object. If we called that function by itself, the answer returned would almost certainly be undefined, since the global window object doesn’t have a num property unless we explicitly set one. We need some way of telling multiply what its this keyword ought refer to; the call method of the multiply function is exactly what we’re looking for.</p>
+        </div>
+      </div>
+      <div class="console"><p>Idle</p></div>
+    </div>
+    <div id="code">
+      <h2>Code</h2>
+      <div id="editor">
+        <form action="#">
+          <textarea rows="16" cols="50"></textarea>
+          <input id="run" type="submit" value="Compile &amp; Run" />
+        </form>
+      </div>
+      <div id="compiled">
+        <form action="#">
+          <textarea readonly rows="16" cols="50"></textarea>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
