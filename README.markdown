@@ -6,7 +6,21 @@ Currently, this is strictly for fiddling around.
 
 ## Getting Started
 
+Try the [online demo](http://wasnotrice.github.com/shoes-black/).
+
+## Hacking
+
+You will need [Node](http://nodejs.org/), [npm](http://npmjs.org/), and  [CoffeeScript](http://coffeescript.org/) installed. On OS X, try
+
+    $ brew install node
+    $ npm install -g coffee-script
+
+Then, clone this repository, build the javascript, and run the demo
+locally.
+
+    $ coffee -o lib -c src/*.coffee
     $ open index.html
+
 
 ## Goals
 
@@ -27,3 +41,4 @@ it out!
 
 Please see the sample ("Load sample" button) for a relatively short and
 complete example of the features.
+
