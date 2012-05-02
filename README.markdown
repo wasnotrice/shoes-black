@@ -18,9 +18,8 @@ You will need [Node](http://nodejs.org/), [npm](http://npmjs.org/), and  [Coffee
 Then, clone this repository, build the javascript, and run the demo
 locally.
 
-    $ coffee -o lib -c src/*.coffee
+    $ cake build
     $ open index.html
-
 
 ## Goals
 
