@@ -11,5 +11,8 @@ class Rect
     @context.stroke()
     this
 
+  hide: ->
+    this
+
 exports = exports ? window
 exports.Rect = Rect
