@@ -7,8 +7,9 @@ appFiles = [
   "shoes"
 ]
 
+clean = ['lib']
+
 task "build", "Build a single 'shoes-app.js' file", ->
-  div = "\n*********************\n"
   appContents = new Array
   remaining = appFiles.length
   for file, index in appFiles
@@ -18,12 +19,29 @@ task "build", "Build a single 'shoes-app.js' file", ->
         appContents[index] = fileContents
         process(appContents) if --remaining is 0
   process = (contents) ->
-    console.log "Processing: #{contents}"
-    fs.writeFile 'lib/shoes-app.coffee', contents.join('\n\n'), 'utf8', (err) ->
+    fs.stat 'lib', (err, stats) ->
+      throw err if err? and err.code isnt 'ENOENT'
+      if err?
+        fs.mkdir 'lib', '0755', (err) ->
+          throw err if err
+          console.log 'Created lib directory'
+          write(contents)
+      else
+        write(contents)
+  write = (contents) ->
+    # Write concatenated .coffee file temporarily
+    filename = 'shoes-app'
+    fs.writeFile "lib/#{filename}.coffee", contents.join('\n\n'), 'utf8', (err) ->
       throw err if err
-      exec 'coffee --compile lib/shoes-app.coffee', (err, stdout, stderr) ->
+      exec "coffee --compile lib/#{filename}.coffee", (err, stdout, stderr) ->
         throw err if err
-        console.log stdout + stderr
-        fs.unlink 'lib/shoes-app.coffee', (err) ->
-        throw err if err
-        console.log 'App monolithically compiled to lib/shoes-app.js'
+        console.log stdout + stderr unless stdout + stderr is ""
+        # Remove concatenated .coffee file
+        fs.unlink "lib/#{filename}.coffee", (err) ->
+          throw err if err
+          console.log "App compiled to lib/#{filename}.js"
+
+task "clean", "Clean build products", ->
+  for file in clean
+    do (file) ->
+      exec "rm -rf #{file}"
