@@ -10,6 +10,8 @@
         $("#editor").submit(function() {
           var code = $("#editor textarea").val();
           var compile = function (code) {
+            console.log("Compiling");
+            console.log(code);
             var jsCode;
             try {
               jsCode = CoffeeScript.compile(code, { bare: true });
@@ -23,9 +25,20 @@
           var run = function (code) {
             eval(code);
           };
+
+          // Clear the app's non-drawn content (text, buttons, etc)
           $("#app-content").empty();
-          // Replace with a fresh canvas
-          $("#app-canvas").replaceWith('<canvas id="app-canvas" height="400" width="500"></canvas>');
+
+          // Store the current transformation matrix, clear, then restore
+          // the old one
+          // http://stackoverflow.com/a/6722031/1024897
+          var canvas = $("#app-canvas")[0];
+          var ctx = canvas.getContext('2d');
+          ctx.save();
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.restore();
+
           var jsCode = compile(code);
           $("#compiled textarea").text(jsCode);
           run(jsCode);
