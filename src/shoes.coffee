@@ -23,7 +23,7 @@ class Shoes
   @eval: (object, block) ->
     rect = object.rect
     para = object.para
-    code = "withContext = " + block.toString() + ";"
+    code = "var withContext = " + block.toString() + ";"
     eval(code)
     withContext.call(object)
     object
