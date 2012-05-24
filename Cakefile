@@ -38,8 +38,8 @@ task "build", "Build a single 'shoes-app.js' file", ->
         console.log stdout + stderr unless stdout + stderr is ""
         # Remove concatenated .coffee file
         fs.unlink "lib/#{filename}.coffee", (err) ->
-        throw err if err
-        console.log "App compiled to lib/#{filename}.js"
+          throw err if err
+          console.log "App compiled to lib/#{filename}.js"
 
 task "clean", "Clean build products", ->
   for file in clean
