@@ -27,11 +27,13 @@
 #editor textarea, #compiled textarea {
   margin: 0 0 1em;
   border: 2px solid #ccc;
+  display: block;
 }
 
 #compiled textarea {
   display: block;
   background-color: #eee;
+  margin-top: 1em;
 }
 
 #code textarea, .console {
