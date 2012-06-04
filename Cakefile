@@ -2,9 +2,12 @@ fs = require 'fs'
 {exec} = require 'child_process'
 
 appFiles = [
+  "shoes"
+  "dsl"
+  "app"
   "para"
   "rect"
-  "shoes"
+  "flow"
 ]
 
 clean = ['lib']

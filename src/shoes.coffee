@@ -1,6 +1,14 @@
 # use exports also in browser
 exports = exports ? window
 
+# from https://github.com/jashkenas/coffee-script/wiki/FAQ
+exports.extend = (obj, mixin) ->
+  for name, method of mixin
+    obj[name] = method
+
+exports.include = (klass, mixin) ->
+  extend klass.prototype, mixin
+
 class Shoes
   @app: (block) ->
     app = new Shoes.App block
@@ -21,30 +29,18 @@ class Shoes
   # Adds local variables aliased to the DSL methods on object.
   # Re-evals block to pick up local variables.
   @eval: (object, block) ->
-    rect = object.rect
-    para = object.para
+    # reassign a function to `object`. Allows use of the Shoes DSL, without the
+    # explicit receiver expected by functions in Shoes.Dsl
+    reassign = (f) ->
+      (args...) ->
+        object[f](object, args...)
+    rect = reassign "rect"
+    para = reassign "para"
+    flow = reassign "flow"
     code = "var withContext = " + block.toString() + ";"
     eval(code)
-    withContext.call(object)
+    withContext.apply(object)
     object
 
 exports.Shoes = Shoes
-
-class Shoes.App
-
-  constructor: (@block) ->
-    @canvas = document.getElementById 'app-canvas'
-    @context = @canvas.getContext '2d'
-    @container = document.getElementById 'app-content'
-    @container.innerHTML = ''
-    if @block then Shoes.eval this, @block
-
-  rect: (left, top, width, height, style = {}) =>
-    console.log("Making rect(#{left}, #{top}, #{width}, #{height}")
-    rect = new Rect(@context, left, top, width, height, style)
-    rect.draw()
-
-  para: (text, style = {}) =>
-    new Para(@container, text, style)
-
 

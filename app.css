@@ -6,8 +6,8 @@
 #app .container {
   position: relative;
   border: 2px solid #ccc;
-  width: 500px;
-  height: 400px;
+  width: 600px;
+  height: 500px;
 }
 
 #app-content {
